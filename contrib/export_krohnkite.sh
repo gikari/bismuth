@@ -7,24 +7,18 @@ main ()
 {
   # Declare a map of shortcuts keys
   declare -A bis_to_kro
-  bis_to_kro["decrease_master_size"]=""
   bis_to_kro["decrease_master_win_count"]="Krohnkite: Decrease"
   bis_to_kro["decrease_window_height"]="Krohnkite: Shrink Height"
   bis_to_kro["decrease_window_width"]="Krohnkite: Shrink Width"
   bis_to_kro["focus_bottom_window"]="Krohnkite: Down/Next"
   bis_to_kro["focus_left_window"]="Krohnkite: Left"
-  bis_to_kro["focus_next_window"]=""
-  bis_to_kro["focus_prev_window"]=""
   bis_to_kro["focus_right_window"]="Krohnkite: Right"
   bis_to_kro["focus_upper_window"]="Krohnkite: Up/Prev"
-  bis_to_kro["increase_master_size"]=""
   bis_to_kro["increase_master_win_count"]="Krohnkite: Increase"
   bis_to_kro["increase_window_height"]="Krohnkite: Grow Height"
   bis_to_kro["increase_window_width"]="Krohnkite: Grow Width"
   bis_to_kro["move_window_to_bottom_pos"]="Krohnkite: Move Down/Next"
   bis_to_kro["move_window_to_left_pos"]="Krohnkite: Move Left"
-  bis_to_kro["move_window_to_next_pos"]=""
-  bis_to_kro["move_window_to_prev_pos"]=""
   bis_to_kro["move_window_to_right_pos"]="Krohnkite: Move Right"
   bis_to_kro["move_window_to_upper_pos"]="Krohnkite: Move Up/Prev"
   bis_to_kro["next_layout"]="Krohnkite: Next Layout"
@@ -66,6 +60,9 @@ main ()
 
     kwriteconfig5 --file "${config_file_path}" --group "kwin" --key "${kro_key}" --delete > /dev/null 2>&1
     kwriteconfig5 --file "${config_file_path}" --group "bismuth" --key "${bis_key}" "${kro_primary_shortcut:-none},${kro_secondary_shortcut:-none},${bis_description}"
+
+    kwriteconfig5 --file "${config_file_path}" --group "bismuth" --key "${bis_key}" --delete > /dev/null 2>&1
+    kwriteconfig5 --file "${config_file_path}" --group "kwin" --key "${kro_key}" "${bis_primary_shortcut:-none},${bis_secondary_shortcut:-none},${kro_description}"
   done
 
   # Reload shortcuts configuration
